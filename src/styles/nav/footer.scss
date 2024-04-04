@@ -1,0 +1,20 @@
+.footer-container {
+  position: fixed;
+  bottom: -50px;
+  height: 50px;
+  width: 100%;
+  background-color: blueviolet;
+  transition: bottom 0.3s ease;
+
+  .footer-wrapper {
+    @include flex-space-around;
+
+    .footer-links {
+      width: 95%;
+      display: flex;
+      justify-content: space-evenly;
+      color: $cambridge;
+      font-family: "Outfit", sans-serif;
+    }
+  }
+}

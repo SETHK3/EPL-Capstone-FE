@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad&display=swap");
+
+html,
+body {
+  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: $alice;
+}
+
+.App {
+  text-align: center;
+}
+
+.page-container {
+  margin-top: 90px;
+  margin-bottom: 90px;
+}
+
+a {
+  text-decoration: none;
+  cursor: zoom-in;
+}
+
+button {
+  background-color: $cinereous;
+  font-family: "Press Start 2P", sans-serif;
+  color: $alice;
+  cursor: pointer;
+}
+
+span {
+  font-family: "Press Start 2P", sans-serif;
+  padding-left: 10px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: $alice;
+  text-transform: uppercase;
+  cursor: crosshair;
+  transition: text-shadow 0.3s ease-out;
+
+  &:hover {
+    text-shadow: 0.06em 0.06em $cambridge, 0.12em 0.12em $celestial,
+      0.18em 0.18em $alice, 0.24em 0.24em $cerulean, 0.3em 0.3em #3462fe;
+    transition: text-shadow 0.3s ease-in;
+  }
+}
+
+h1 {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  transition: text-shadow 0.3s ease-out;
+
+  &:hover {
+    text-shadow: 0.06em 0.06em $dun, 0.12em 0.12em $rose-quartz,
+      0.18em 0.18em $cinereous, 0.24em 0.24em $sepia, 0.3em 0.3em $mortuum;
+    transition: text-shadow 0.3s ease-in;
+  }
+}

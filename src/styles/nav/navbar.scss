@@ -1,0 +1,31 @@
+.navbar-container {
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  background-color: black;
+
+  .navbar-wrapper {
+    @include flex-space-around;
+
+    .navbar-logo {
+      display: flex;
+      padding: 5px 0 5px 0;
+
+      img {
+        height: 60px;
+        margin-left: 30px;
+      }
+    }
+
+    .navbar-links {
+      width: 50%;
+      position: relative;
+      display: flex;
+      justify-content: space-evenly;
+      margin-left: 100px;
+      font-family: "Press Start 2P";
+      font-size: 12px;
+    }
+  }
+}
