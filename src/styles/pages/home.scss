@@ -1,7 +1,11 @@
 .home-page {
   h1 {
     font-family: "Oswald", sans-serif;
-    font-size: 160px;
+    font-size: 80px;
+  }
+
+  img {
+    height: 500px;
   }
 
   .home-content-wrapper {
@@ -9,7 +13,9 @@
     justify-content: center;
 
     .home-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto;
+      gap: 20px;
 
       .home-image {
         display: flex;
