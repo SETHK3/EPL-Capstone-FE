@@ -14,7 +14,7 @@ function App() {
           <NavBar />
         </div>
         <Routes>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" element={Home} />
         </Routes>
       </Router>
       <div className="footer-container">
