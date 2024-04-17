@@ -15,8 +15,8 @@ function App() {
           <NavBar />
         </div>
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/teams" element={<Teams />} />
+          <Route exact path="/" component={<Home />} />
+          <Route path="/teams" component={<Teams />} />
         </Routes>
       </Router>
       <div className="footer-container">
