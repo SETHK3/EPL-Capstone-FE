@@ -18,11 +18,12 @@ export default function LoginPage() {
 
   return (
     <div className="login-page-container">
-      <form onSubmit={loginForm}>
+      <form className="login-form" onSubmit={loginForm}>
         <input
           type="text"
           value={email}
           placeholder="email"
+          className="input-field"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -31,11 +32,14 @@ export default function LoginPage() {
           type="password"
           value={password}
           placeholder="password"
+          className="input-field"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
-        <button type="submit">Login</button>
+        <button className="login-button" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

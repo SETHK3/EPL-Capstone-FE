@@ -10,11 +10,13 @@ export default function NavBar() {
           <img src={logo} alt="2950 logo" />
         </div>
         <div className="navbar-links">
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/home">Home</NavLink>
           <NavLink to="/teams">Teams</NavLink>
           <NavLink to="/managers">Managers</NavLink>
           <NavLink to="/players">Players</NavLink>
           <NavLink to="/stats">Stats</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Sign Up</NavLink>
         </div>
       </div>
     </div>
