@@ -15,8 +15,9 @@ export default function NavBar() {
           <NavLink to="/managers">Managers</NavLink>
           <NavLink to="/players">Players</NavLink>
           <NavLink to="/stats">Stats</NavLink>
+          <NavLink to="/signup">Create Account</NavLink>
+          <NavLink to="/profile">My Profile</NavLink>
           <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign Up</NavLink>
         </div>
       </div>
     </div>
