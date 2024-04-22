@@ -24,8 +24,8 @@
       display: flex;
       justify-content: space-evenly;
       margin-left: 100px;
-      font-family: "Press Start 2P";
-      font-size: 12px;
+      font-family: "League Gothic", sans-serif;
+      font-size: 30px;
     }
     .dropdown-link {
       display: flex;
@@ -33,7 +33,7 @@
     }
 
     .dropdown-arrow {
-      margin-left: -10px;
+      margin-left: -5px;
     }
 
     .navbar-dropdown {
@@ -56,7 +56,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding: 10px 0 10px 0;
+      padding: 10px 0 10px 10px;
     }
   }
 }

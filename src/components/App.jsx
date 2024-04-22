@@ -7,6 +7,7 @@ import Teams from "./pages/Teams";
 import PrivateRoute from "./routing/PrivateRoute";
 import LoginPage from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Managers from "./pages/Managers";
 
 import "../styles/App.scss";
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/teams" component={Teams} />
+            <PrivateRoute path="/managers" component={Managers} />
           </Switch>
         </div>
       </Router>

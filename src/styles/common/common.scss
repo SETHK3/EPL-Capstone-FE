@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Afacad&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad&family=League+Gothic&display=swap");
 
 html,
 body {
@@ -28,13 +29,13 @@ a {
 
 button {
   background-color: $cinereous;
-  font-family: "Press Start 2P", sans-serif;
+  font-family: "League Gothic", sans-serif;
   color: $alice;
   cursor: pointer;
 }
 
 span {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: "League Gothic", sans-serif;
   padding-left: 10px;
 }
 
@@ -46,9 +47,7 @@ span {
   transition: text-shadow 0.3s ease-out;
 
   &:hover {
-    text-shadow: 0.06em 0.06em $cambridge, 0.12em 0.12em $celestial,
-      0.18em 0.18em $alice, 0.24em 0.24em $cerulean, 0.3em 0.3em #3462fe;
-    transition: text-shadow 0.3s ease-in;
+    color: $cerulean;
   }
 }
 
