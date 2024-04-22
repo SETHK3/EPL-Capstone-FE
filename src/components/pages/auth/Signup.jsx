@@ -13,17 +13,20 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const body = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    console.log(body);
+
     fetch("http://localhost:8086/signup", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
-      }),
+      body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {

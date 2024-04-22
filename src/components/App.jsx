@@ -23,8 +23,8 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/teams" component={Teams} />
-            <PrivateRoute path="/managers" component={Managers} />
+            <Route path="/teams" component={Teams} />
+            <Route path="/managers" component={Managers} />
           </Switch>
         </div>
       </Router>

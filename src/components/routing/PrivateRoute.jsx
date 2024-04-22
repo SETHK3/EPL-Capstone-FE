@@ -1,14 +1,26 @@
-import { useAuthInfo } from "../../context/AuthContext";
 import { Redirect, Route } from "react-router-dom";
 
-export default function PrivateRoute({ children, ...rest }) {
-  const userInfo = useAuthInfo();
+import { useAuthInfo } from "../../context/AuthContext";
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { userInfo } = useAuthInfo();
+
+  const isAuthenticated = userInfo;
+
   return (
     <Route
       {...rest}
-      render={() => {
-        return userInfo ? children : <Redirect to="/login" />;
-      }}
+      render={(props) =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
+      }
     />
   );
-}
+};
+
+export default PrivateRoute;
