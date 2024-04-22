@@ -42,44 +42,52 @@ export default function Signup() {
 
   return (
     <div className="signup-page-container">
-      <h1>Create an Account</h1>
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={firstName}
-          placeholder="First Name"
-          className="input-field"
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          value={lastName}
-          placeholder="Last Name"
-          className="input-field"
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          value={email}
-          placeholder="Email"
-          className="input-field"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          placeholder="Password"
-          className="input-field"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button className="signup-button" type="submit">
-          Sign Up
-        </button>
-      </form>
+      <div>
+        <h1>Create an Account</h1>
+      </div>
+      <div>
+        <form
+          className="signup-form"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            value={firstName}
+            placeholder="First Name"
+            className="input-field"
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            value={lastName}
+            placeholder="Last Name"
+            className="input-field"
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            value={email}
+            placeholder="Email"
+            className="input-field"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            placeholder="Password"
+            className="input-field"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button className="signup-button" type="submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
       <ToastContainer />
     </div>
   );
