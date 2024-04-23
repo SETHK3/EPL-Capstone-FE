@@ -1,0 +1,22 @@
+.managers-container {
+  padding: 20px;
+}
+
+.manager-list {
+  list-style: none;
+  padding: 0;
+}
+
+.manager-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.manager-details {
+  margin-left: 20px;
+}
+
+.manager-details p {
+  margin: 5px 0;
+}
