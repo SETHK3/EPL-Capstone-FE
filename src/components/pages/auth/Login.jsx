@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthInfo } from "../../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export default function LoginPage() {
-  const { login } = useAuthInfo();
+  const { login, userInfo } = useAuthInfo();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -13,8 +13,14 @@ export default function LoginPage() {
     login(email, password);
     setEmail("");
     setPassword("");
-    history.push("/home");
+    console.log(userInfo);
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/home");
+    }
+  }, [userInfo, history]);
 
   return (
     <div className="login-page-container">

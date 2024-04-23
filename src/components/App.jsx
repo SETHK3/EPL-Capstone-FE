@@ -20,11 +20,11 @@ function App() {
         </div>
         <div className="page-container">
           <Switch>
-            <Route exact path="/home" component={Home} />
+            <PrivateRoute exact path="/home" component={Home} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={Signup} />
-            <Route path="/teams" component={Teams} />
-            <Route path="/managers" component={Managers} />
+            <PrivateRoute path="/teams" component={Teams} />
+            <PrivateRoute path="/managers" component={Managers} />
           </Switch>
         </div>
       </Router>

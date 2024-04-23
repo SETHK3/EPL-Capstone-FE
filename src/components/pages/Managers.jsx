@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 
+import { useAuthInfo } from "../../context/AuthContext";
+
 export default function Managers() {
   const [managers, setManagers] = useState([]);
   const [filterManagers, setFilterManagers] = useState([]);
+  const { userInfo } = useAuthInfo();
 
   useEffect(() => {
-    fetch("http://localhost:8086/managers")
+    console.log(userInfo);
+    fetch("http://localhost:8086/managers", {
+      headers: {
+        auth: String(userInfo.auth_token),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setManagers(data.results || []);
