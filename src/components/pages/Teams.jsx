@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
+import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Teams() {
-  const [teamsData, setTeamsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [teams, setTeams] = useState([]);
+  const { userInfo } = useAuthInfo();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch();
-        if (!response.ok) {
-          throw new Error("Failed to fetch team data");
-        }
-        const teamData = await response.json();
-        setTeamsData(teamData);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+    fetch("http://localhost:8086/teams", {
+      headers: {
+        auth: String(userInfo.auth_token),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setTeams(data.results || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching teams:", error);
+      });
+  }, [userInfo]);
 
   return (
     <div className="teams-page" page-container>
@@ -46,6 +43,21 @@ export default function Teams() {
             <tbody>{}</tbody>
           </table>
         </div>
+      </div>
+      <div className="teams-list">
+        {teams.map((teams) => (
+          <div key={teams.team_id} className="team-item">
+            <div>
+              <img src={teams.photo} alt="team-logo" />
+            </div>
+            <div className="team-details">
+              <p>Team Name: {teams.team_name}</p>
+              <p>Location: {teams.location}</p>
+              <p>Stadium Name: {teams.stadium_name}</p>
+              <p>Manager: {teams.manager_id}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

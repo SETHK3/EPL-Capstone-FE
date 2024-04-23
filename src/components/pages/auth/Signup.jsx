@@ -14,12 +14,11 @@ export default function Signup() {
     e.preventDefault();
 
     const body = {
-      firstName: firstName,
-      lastName: lastName,
+      first_name: firstName,
+      last_name: lastName,
       email: email,
       password: password,
     };
-    console.log(body);
 
     fetch("http://localhost:8086/signup", {
       method: "POST",

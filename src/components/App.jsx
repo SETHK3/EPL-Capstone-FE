@@ -8,6 +8,7 @@ import PrivateRoute from "./routing/PrivateRoute";
 import LoginPage from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Managers from "./pages/Managers";
+import ProfilePage from "./pages/auth/Profile";
 
 import "../styles/App.scss";
 
@@ -23,6 +24,7 @@ function App() {
             <PrivateRoute exact path="/home" component={Home} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={Signup} />
+            <Route path="/profile" component={ProfilePage} />
             <PrivateRoute path="/teams" component={Teams} />
             <PrivateRoute path="/managers" component={Managers} />
           </Switch>

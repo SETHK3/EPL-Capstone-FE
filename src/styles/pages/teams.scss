@@ -12,3 +12,26 @@ th {
   align-items: center;
   padding-top: 5px;
 }
+
+.teams-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px 20px 0 20px;
+}
+
+.team-item {
+  border: 3px solid #2c0a3e;
+  padding: 10px;
+}
+
+.team-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.team-details p {
+  margin: 5px 0;
+}

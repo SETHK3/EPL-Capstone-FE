@@ -24,13 +24,20 @@ export default function AuthProvider({ children }) {
       })
       .then((data) => {
         setUserInfo(data.message.auth_token);
+        setUserInfo(data.message.auth_token.user);
+        console.log(data);
       })
       .catch((err) => {
         console.error("error logging in", err);
       });
   };
 
-  const values = { login, userInfo };
+  const signup = (userData) => {
+    setUserInfo(userData);
+    history.push("/login");
+  };
+
+  const values = { login, signup, userInfo };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
