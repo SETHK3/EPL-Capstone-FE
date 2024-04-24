@@ -35,10 +35,12 @@ export default function AuthProvider({ children }) {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        auth: String(userInfo.auth_token),
       },
     })
       .then((res) => {
         if (res.ok) {
+          setUserInfo(null);
           console.log("Successfully logged out");
         } else {
           console.error("Failed logging out");

@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import Teams from "./pages/Teams";
 import PrivateRoute from "./routing/PrivateRoute";
 import LoginPage from "./pages/auth/Login";
-import Logout from "./pages/auth/Logout";
 import Signup from "./pages/auth/Signup";
 import Managers from "./pages/Managers";
 import ProfilePage from "./pages/auth/Profile";
@@ -36,9 +35,8 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/home" component={Home} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Signup} />
-            <Route path="/profile" component={ProfilePage} />
+            <PrivateRoute path="/profile" component={ProfilePage} />
             {isAdmin && (
               <PrivateRoute path="/admin/users" component={AdminUsersPage} />
             )}
