@@ -30,12 +30,31 @@ export default function AuthProvider({ children }) {
       });
   };
 
+  const logout = () => {
+    fetch(`http://localhost:8086/logout/${userInfo.user_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("Successfully logged out");
+        } else {
+          console.error("Failed logging out");
+        }
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
+  };
+
   const signup = (userData) => {
     setUserInfo(userData);
     history.push("/login");
   };
 
-  const values = { login, signup, userInfo };
+  const values = { login, logout, signup, userInfo };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }

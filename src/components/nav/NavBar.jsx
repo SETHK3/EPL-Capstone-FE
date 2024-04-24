@@ -2,8 +2,12 @@ import { NavLink } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 
 import logo from "../../assets/images/epl-logo-2.png";
+import { useAuthInfo } from "../../context/AuthContext";
 
 export default function NavBar() {
+  const { userInfo } = useAuthInfo();
+  const isAdmin = userInfo?.user.role === "admin";
+
   return (
     <div className="navbar-container">
       <div className="navbar-wrapper">
@@ -23,7 +27,9 @@ export default function NavBar() {
             <div className="dropdown-content">
               <NavLink to="/signup">Create Account</NavLink>
               <NavLink to="/profile">My Profile</NavLink>
+              {isAdmin && <NavLink to="/admin/users">Users</NavLink>}
               <NavLink to="/login">Login</NavLink>
+              <NavLink to="/logout">Logout</NavLink>
             </div>
           </div>
         </div>
