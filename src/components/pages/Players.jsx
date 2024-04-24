@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthInfo } from "../../context/AuthContext";
 
-export default function players() {
+export default function Players() {
   const [players, setPlayers] = useState([]);
   const { userInfo } = useAuthInfo();
 
@@ -24,22 +24,26 @@ export default function players() {
     <div className="players-page" page-container>
       <h1>Players Table</h1>
       <div className="players-list">
-        {players.map((players) => (
-          <div key={players.player_id} className="player-item">
-            <div>
-              <img src={players.photo} alt="player-logo" />
+        {players.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          players.map((player) => (
+            <div key={player.player_id} className="player-item">
+              <div>
+                <img src={player.photo} alt="player" />
+              </div>
+              <div className="player-details">
+                <p>First Name: {player.first_name}</p>
+                <p>Last Name: {player.last_name}</p>
+                <p>Nationality: {player.nationality}</p>
+                <p>Date of Birth: {player.date_of_birth}</p>
+                <p>Position: {player.position}</p>
+                <p>Team: {player.team.team_name}</p>
+                <p>Active: {player.active}</p>
+              </div>
             </div>
-            <div className="player-details">
-              <p>First Name: {players.first_name}</p>
-              <p>Last Name: {players.last_name}</p>
-              <p>Nationality: {players.nationality}</p>
-              <p>Date of Birth: {players.date_of_birth}</p>
-              <p>Position: {players.position}</p>
-              <p>Team: {players.team}</p>
-              <p>Active: {players.active}</p>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

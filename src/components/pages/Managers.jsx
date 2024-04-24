@@ -47,7 +47,7 @@ export default function Managers() {
   };
 
   return (
-    <div>
+    <div className="managers-page" page-container>
       <h1>All Managers</h1>
       <div>
         <button onClick={filterByActive}>Filter by Active</button>

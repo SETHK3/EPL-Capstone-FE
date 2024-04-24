@@ -9,6 +9,8 @@ import LoginPage from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Managers from "./pages/Managers";
 import ProfilePage from "./pages/auth/Profile";
+import Players from "./pages/Players";
+import Stats from "./pages/Stats";
 
 import "../styles/App.scss";
 
@@ -27,6 +29,8 @@ function App() {
             <Route path="/profile" component={ProfilePage} />
             <PrivateRoute path="/teams" component={Teams} />
             <PrivateRoute path="/managers" component={Managers} />
+            <PrivateRoute path="/players" component={Players} />
+            <PrivateRoute path="/stats" component={Stats} />
           </Switch>
         </div>
       </Router>

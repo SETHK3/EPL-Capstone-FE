@@ -13,7 +13,6 @@ export default function LoginPage() {
     login(email, password);
     setEmail("");
     setPassword("");
-    console.log(userInfo);
   };
 
   useEffect(() => {
