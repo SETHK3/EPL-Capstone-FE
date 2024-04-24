@@ -24,8 +24,6 @@ export default function AuthProvider({ children }) {
       })
       .then((data) => {
         setUserInfo(data.message.auth_token);
-        setUserInfo(data.message.auth_token.user);
-        console.log(data);
       })
       .catch((err) => {
         console.error("error logging in", err);

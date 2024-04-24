@@ -11,15 +11,15 @@ export default function ProfilePage() {
           <tbody>
             <tr>
               <td>First Name:</td>
-              <td>{userInfo.firstName}</td>
+              <td>{userInfo.user.first_name}</td>
             </tr>
             <tr>
               <td>Last Name:</td>
-              <td>{userInfo.lastName}</td>
+              <td>{userInfo.user.last_name}</td>
             </tr>
             <tr>
               <td>Email:</td>
-              <td>{userInfo.email}</td>
+              <td>{userInfo.user.email}</td>
             </tr>
             <tr>
               <td>Password:</td>
@@ -27,11 +27,7 @@ export default function ProfilePage() {
             </tr>
             <tr>
               <td>Role:</td>
-              <td>{userInfo.role}</td>
-            </tr>
-            <tr>
-              <td>Active Status:</td>
-              <td>{userInfo.active}</td>
+              <td>{userInfo.user.role}</td>
             </tr>
           </tbody>
         </table>
