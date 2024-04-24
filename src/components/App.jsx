@@ -5,18 +5,19 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Footer from "./nav/Footer";
-import NavBar from "./nav/NavBar";
-import Home from "./pages/Home";
-import Teams from "./pages/Teams";
+import AdminUsersPage from "./pages/auth/UsersAdmin";
 import PrivateRoute from "./routing/PrivateRoute";
+import ProfilePage from "./pages/auth/Profile";
 import LoginPage from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Managers from "./pages/Managers";
-import ProfilePage from "./pages/auth/Profile";
 import Players from "./pages/Players";
+import Footer from "./nav/Footer";
+import NavBar from "./nav/NavBar";
+import Teams from "./pages/Teams";
 import Stats from "./pages/Stats";
-import AdminUsersPage from "./pages/auth/UsersAdmin";
+import Home from "./pages/Home";
+
 import { useAuthInfo } from "../context/AuthContext";
 
 import "../styles/App.scss";
