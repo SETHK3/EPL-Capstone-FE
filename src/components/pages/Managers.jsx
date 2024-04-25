@@ -5,7 +5,6 @@ import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Managers() {
   const [managers, setManagers] = useState([]);
-  const [filterManagers, setFilterManagers] = useState([]);
   const { userInfo } = useAuthInfo();
   const [managerName, setManagerName] = useState("");
   const [nationality, setNationality] = useState("");
@@ -21,19 +20,11 @@ export default function Managers() {
       .then((res) => res.json())
       .then((data) => {
         setManagers(data.results || []);
-        setFilterManagers(data.results || []);
       })
       .catch((error) => {
         console.error("Error fetching managers:", error);
       });
   }, [userInfo]);
-
-  const handleSortAlphabetically = () => {
-    const sortedManagers = [...managers].sort((a, b) =>
-      a.manager_name.localeCompare(b.manager_name)
-    );
-    setFilterManagers(sortedManagers);
-  };
 
   const handleAddManager = () => {
     const body = {
@@ -79,26 +70,6 @@ export default function Managers() {
       });
   };
 
-  const updateManager = (managerId) => {
-    fetch(`http://localhost:8086/manager/${managerId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        auth: String(userInfo.auth_token),
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to update manager");
-        }
-        fetchManagers();
-      })
-      .catch((error) => {
-        console.error("Error updating manager:", error);
-      });
-  };
-
   const handleDeleteManager = (managerId) => {
     fetch(`http://localhost:8086/manager/delete/${managerId}`, {
       method: "DELETE",
@@ -124,7 +95,6 @@ export default function Managers() {
       <h1>All Managers</h1>
 
       <div>
-        <button onClick={handleSortAlphabetically}>Sort Alphabetically</button>
         {isAdmin && (
           <form>
             <input
@@ -153,7 +123,7 @@ export default function Managers() {
       </div>
 
       <div className="manager-list">
-        {filterManagers.map((manager) => (
+        {managers.map((manager) => (
           <div key={manager.manager_id} className="manager-item">
             <div>
               <img src={managerLogo} alt="manager" />
@@ -162,15 +132,6 @@ export default function Managers() {
               <p>Name: {manager.manager_name}</p>
               <p>Nationality: {manager.nationality}</p>
               <p>Date of Birth: {manager.date_of_birth}</p>
-              <button
-                onClick={() =>
-                  updateManager(manager.manager_id, {
-                    /* updated manager data */
-                  })
-                }
-              >
-                Update
-              </button>
               {isAdmin && (
                 <button onClick={() => handleDeleteManager(manager.manager_id)}>
                   Delete

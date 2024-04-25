@@ -184,7 +184,12 @@ export default function Teams() {
               <p>Team Name: {teams.team_name}</p>
               <p>Location: {teams.location}</p>
               <p>Stadium Name: {teams.stadium_name}</p>
-              <p>Manager: {teams.manager.manager_name}</p>
+              <p>
+                Manager:{" "}
+                {teams.manager
+                  ? teams.manager.manager_name
+                  : "No Manager Assigned"}
+              </p>
               {isAdmin && (
                 <button onClick={() => handleDeleteTeam(teams.team_id)}>
                   Delete

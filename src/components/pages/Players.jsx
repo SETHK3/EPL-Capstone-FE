@@ -193,7 +193,10 @@ export default function Players() {
                 <p>Nationality: {player.nationality}</p>
                 <p>Date of Birth: {player.date_of_birth}</p>
                 <p>Position: {player.position}</p>
-                <p>Team: {player.team.team_name}</p>
+                <p>
+                  Team:{" "}
+                  {player.team ? player.team.team_name : "No Team Assigned"}
+                </p>
                 <p>Active: {player.active ? "True" : "False"}</p>
                 {isAdmin && (
                   <button onClick={() => handleDeletePlayer(player.player_id)}>
