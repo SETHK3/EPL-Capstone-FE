@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Players() {
@@ -120,18 +122,21 @@ export default function Players() {
             onChange={(e) => setNationality(e.target.value)}
             placeholder="Nationality"
           />
-          <input
-            type="text"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            placeholder="Date of Birth"
+          <DatePicker
+            selected={dateOfBirth}
+            onChange={(date) => setDateOfBirth(date)}
+            placeholderText="Date of Birth"
           />
-          <input
-            type="text"
+          <select
             value={position}
             onChange={(e) => setPosition(e.target.value)}
             placeholder="Position"
-          />
+          >
+            <option value="">Select Position</option>
+            <option value="Forward">Forward</option>
+            <option value="Midfield">Midfield</option>
+            <option value="Defence">Defence</option>
+          </select>
           <select
             value={selectedTeam}
             onChange={(e) => setSelectedTeam(e.target.value)}

@@ -6,27 +6,27 @@ export default function AdminUsersPage() {
   const { userInfo } = useAuthInfo();
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:8086/users", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          auth: String(userInfo.auth_token),
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch users");
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:8086/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            auth: String(userInfo.auth_token),
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setUsers(data.results);
+      } catch (error) {
+        console.error("Error fetching users:", error);
       }
-      const data = await response.json();
-      setUsers(data.results);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
+    };
+
+    fetchUsers();
+  }, [userInfo.auth_token]);
 
   return (
     <div className="admin-page">
