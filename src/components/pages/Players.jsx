@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Players() {
   const [players, setPlayers] = useState([]);
+  const [teams, setTeams] = useState([]);
   const { userInfo } = useAuthInfo();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [position, setPosition] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState("");
 
-  useEffect(() => {
+  const fetchPlayers = useCallback(() => {
     fetch("http://localhost:8086/players", {
       headers: {
         auth: String(userInfo.auth_token),
@@ -20,9 +27,128 @@ export default function Players() {
       });
   }, [userInfo]);
 
+  const fetchTeams = useCallback(() => {
+    fetch("http://localhost:8086/teams", {
+      headers: {
+        auth: String(userInfo.auth_token),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setTeams(data.results || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching teams:", error);
+      });
+  }, [userInfo]);
+
+  const handleAddPlayer = () => {
+    const body = {
+      first_name: firstName,
+      last_name: lastName,
+      nationality: nationality,
+      date_of_birth: dateOfBirth,
+      position: position,
+      team_id: selectedTeam,
+    };
+
+    addPlayer(body);
+
+    setFirstName("");
+    setLastName("");
+    setNationality("");
+    setDateOfBirth("");
+    setPosition("");
+    setSelectedTeam("");
+  };
+
+  useEffect(() => {
+    fetchPlayers();
+    fetchTeams();
+  }, [userInfo, fetchPlayers, fetchTeams]);
+
+  const body = {
+    first_name: firstName,
+    last_name: lastName,
+    nationality: nationality,
+    date_of_birth: dateOfBirth,
+    position: position,
+    team_id: selectedTeam,
+  };
+
+  const addPlayer = () => {
+    fetch("http://localhost:8086/player", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        auth: String(userInfo.auth_token),
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to add player");
+        }
+        fetchPlayers();
+      })
+      .catch((error) => {
+        console.error("Error adding player:", error);
+      });
+  };
+
   return (
     <div className="players-page" page-container>
       <h1>Players Table</h1>
+
+      <div>
+        <form>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Last Name"
+          />
+          <input
+            type="text"
+            value={nationality}
+            onChange={(e) => setNationality(e.target.value)}
+            placeholder="Nationality"
+          />
+          <input
+            type="text"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            placeholder="Date of Birth"
+          />
+          <input
+            type="text"
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
+            placeholder="Position"
+          />
+          <select
+            value={selectedTeam}
+            onChange={(e) => setSelectedTeam(e.target.value)}
+          >
+            <option value="">Select Team</option>
+            {teams.map((team) => (
+              <option key={team.team_id} value={team.team_id}>
+                {team.team_name}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={handleAddPlayer}>
+            Add Player
+          </button>
+        </form>
+      </div>
+
       <div className="players-list">
         {players.length === 0 ? (
           <p>Loading...</p>
