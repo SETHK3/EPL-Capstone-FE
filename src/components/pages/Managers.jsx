@@ -9,6 +9,10 @@ export default function Managers() {
   const [managerName, setManagerName] = useState("");
   const [nationality, setNationality] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [managerId, setManagerId] = useState(null);
+  const [editManagerName, setEditManagerName] = useState("");
+  const [editNationality, setEditNationality] = useState("");
+  const [editDateOfBirth, setEditDateOfBirth] = useState("");
   const isAdmin = userInfo?.user.role === "admin";
 
   const fetchManagers = useCallback(() => {
@@ -38,6 +42,44 @@ export default function Managers() {
     setManagerName("");
     setNationality("");
     setDateOfBirth("");
+  };
+
+  const handleUpdateManager = (managerId) => {
+    setManagerId(managerId);
+    const managerToUpdate = managers.find(
+      (manager) => manager.manager_id === managerId
+    );
+    setEditManagerName(managerToUpdate.manager_name);
+    setEditNationality(managerToUpdate.nationality);
+    setEditDateOfBirth(managerToUpdate.date_of_birth);
+  };
+
+  const handleSaveManager = () => {
+    const updatedManager = {
+      manager_id: managerId,
+      manager_name: editManagerName,
+      nationality: editNationality,
+      date_of_birth: editDateOfBirth,
+    };
+
+    fetch(`http://localhost:8086/manager/${managerId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        auth: String(userInfo.auth_token),
+      },
+      body: JSON.stringify(updatedManager),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to update manager");
+        }
+        setManagerId(null);
+        fetchManagers();
+      })
+      .catch((error) => {
+        console.error("Error updating manager:", error);
+      });
   };
 
   useEffect(() => {
@@ -129,13 +171,48 @@ export default function Managers() {
               <img src={managerLogo} alt="manager" />
             </div>
             <div className="manager-details">
-              <p>Name: {manager.manager_name}</p>
-              <p>Nationality: {manager.nationality}</p>
-              <p>Date of Birth: {manager.date_of_birth}</p>
-              {isAdmin && (
-                <button onClick={() => handleDeleteManager(manager.manager_id)}>
-                  Delete
-                </button>
+              {managerId === manager.manager_id ? (
+                <div>
+                  <input
+                    type="text"
+                    value={editManagerName}
+                    onChange={(e) => setEditManagerName(e.target.value)}
+                    placeholder="Manager Name"
+                  />
+                  <input
+                    type="text"
+                    value={editNationality}
+                    onChange={(e) => setEditNationality(e.target.value)}
+                    placeholder="Nationality"
+                  />
+                  <input
+                    type="text"
+                    value={editDateOfBirth}
+                    onChange={(e) => setEditDateOfBirth(e.target.value)}
+                    placeholder="Date of Birth"
+                  />
+                  <button onClick={handleSaveManager}>Save</button>
+                </div>
+              ) : (
+                <div>
+                  <p>Name: {manager.manager_name}</p>
+                  <p>Nationality: {manager.nationality}</p>
+                  <p>Date of Birth: {manager.date_of_birth}</p>
+                  {isAdmin && (
+                    <button
+                      onClick={() => handleUpdateManager(manager.manager_id)}
+                    >
+                      Update
+                    </button>
+                  )}
+                  {isAdmin && (
+                    <button
+                      onClick={() => handleDeleteManager(manager.manager_id)}
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           </div>
