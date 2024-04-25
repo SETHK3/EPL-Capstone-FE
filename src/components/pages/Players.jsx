@@ -14,6 +14,7 @@ export default function Players() {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [position, setPosition] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
+  const isAdmin = userInfo?.user.role === "admin";
 
   const fetchPlayers = useCallback(() => {
     fetch("http://localhost:8086/players", {
@@ -99,60 +100,82 @@ export default function Players() {
       });
   };
 
+  const handleDeletePlayer = (playerId) => {
+    fetch(`http://localhost:8086/player/delete/${playerId}`, {
+      method: "DELETE",
+      headers: {
+        auth: String(userInfo.auth_token),
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete player record");
+        }
+        setPlayers((prevPlayers) =>
+          prevPlayers.filter((player) => player.player_id !== playerId)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting player record:", error);
+      });
+  };
+
   return (
     <div className="players-page" page-container>
       <h1>Players Table</h1>
 
       <div>
-        <form>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            placeholder="First Name"
-          />
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            placeholder="Last Name"
-          />
-          <input
-            type="text"
-            value={nationality}
-            onChange={(e) => setNationality(e.target.value)}
-            placeholder="Nationality"
-          />
-          <DatePicker
-            selected={dateOfBirth}
-            onChange={(date) => setDateOfBirth(date)}
-            placeholderText="Date of Birth"
-          />
-          <select
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            placeholder="Position"
-          >
-            <option value="">Select Position</option>
-            <option value="Forward">Forward</option>
-            <option value="Midfield">Midfield</option>
-            <option value="Defence">Defence</option>
-          </select>
-          <select
-            value={selectedTeam}
-            onChange={(e) => setSelectedTeam(e.target.value)}
-          >
-            <option value="">Select Team</option>
-            {teams.map((team) => (
-              <option key={team.team_id} value={team.team_id}>
-                {team.team_name}
-              </option>
-            ))}
-          </select>
-          <button type="button" onClick={handleAddPlayer}>
-            Add Player
-          </button>
-        </form>
+        {isAdmin && (
+          <form>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+            />
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+            />
+            <input
+              type="text"
+              value={nationality}
+              onChange={(e) => setNationality(e.target.value)}
+              placeholder="Nationality"
+            />
+            <DatePicker
+              selected={dateOfBirth}
+              onChange={(date) => setDateOfBirth(date)}
+              placeholderText="Date of Birth"
+            />
+            <select
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              placeholder="Position"
+            >
+              <option value="">Select Position</option>
+              <option value="Forward">Forward</option>
+              <option value="Midfield">Midfield</option>
+              <option value="Defence">Defence</option>
+            </select>
+            <select
+              value={selectedTeam}
+              onChange={(e) => setSelectedTeam(e.target.value)}
+            >
+              <option value="">Select Team</option>
+              {teams.map((team) => (
+                <option key={team.team_id} value={team.team_id}>
+                  {team.team_name}
+                </option>
+              ))}
+            </select>
+            <button type="button" onClick={handleAddPlayer}>
+              Add Player
+            </button>
+          </form>
+        )}
       </div>
 
       <div className="players-list">
@@ -172,6 +195,11 @@ export default function Players() {
                 <p>Position: {player.position}</p>
                 <p>Team: {player.team.team_name}</p>
                 <p>Active: {player.active ? "True" : "False"}</p>
+                {isAdmin && (
+                  <button onClick={() => handleDeletePlayer(player.player_id)}>
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))

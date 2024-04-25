@@ -10,6 +10,7 @@ export default function Teams() {
   const [stadiumName, setStadiumName] = useState("");
   const [selectedManager, setSelectedManager] = useState("");
   const { userInfo } = useAuthInfo();
+  const isAdmin = userInfo?.user.role === "admin";
 
   const fetchTeams = useCallback(() => {
     fetch("http://localhost:8086/teams", {
@@ -89,6 +90,26 @@ export default function Teams() {
       });
   };
 
+  const handleDeleteTeam = (teamId) => {
+    fetch(`http://localhost:8086/team/delete/${teamId}`, {
+      method: "DELETE",
+      headers: {
+        auth: String(userInfo.auth_token),
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to delete team record");
+        }
+        setTeams((prevTeams) =>
+          prevTeams.filter((team) => team.team_id !== teamId)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting team record:", error);
+      });
+  };
+
   return (
     <div className="teams-page" page-container>
       <h1>Teams Table</h1>
@@ -115,40 +136,42 @@ export default function Teams() {
       </div>
 
       <div>
-        <form>
-          <input
-            type="text"
-            value={teamName}
-            onChange={(e) => setTeamName(e.target.value)}
-            placeholder="Team Name"
-          />
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location"
-          />
-          <input
-            type="text"
-            value={stadiumName}
-            onChange={(e) => setStadiumName(e.target.value)}
-            placeholder="Stadium Name"
-          />
-          <select
-            value={selectedManager}
-            onChange={(e) => setSelectedManager(e.target.value)}
-          >
-            <option value="">Select Manager</option>
-            {managers.map((manager) => (
-              <option key={manager.manager_id} value={manager.manager_id}>
-                {manager.manager_name}
-              </option>
-            ))}
-          </select>
-          <button type="button" onClick={handleAddTeam}>
-            Add Team
-          </button>
-        </form>
+        {isAdmin && (
+          <form>
+            <input
+              type="text"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              placeholder="Team Name"
+            />
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Location"
+            />
+            <input
+              type="text"
+              value={stadiumName}
+              onChange={(e) => setStadiumName(e.target.value)}
+              placeholder="Stadium Name"
+            />
+            <select
+              value={selectedManager}
+              onChange={(e) => setSelectedManager(e.target.value)}
+            >
+              <option value="">Select Manager</option>
+              {managers.map((manager) => (
+                <option key={manager.manager_id} value={manager.manager_id}>
+                  {manager.manager_name}
+                </option>
+              ))}
+            </select>
+            <button type="button" onClick={handleAddTeam}>
+              Add Team
+            </button>
+          </form>
+        )}
       </div>
 
       <div className="teams-list">
@@ -162,6 +185,11 @@ export default function Teams() {
               <p>Location: {teams.location}</p>
               <p>Stadium Name: {teams.stadium_name}</p>
               <p>Manager: {teams.manager.manager_name}</p>
+              {isAdmin && (
+                <button onClick={() => handleDeleteTeam(teams.team_id)}>
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         ))}
