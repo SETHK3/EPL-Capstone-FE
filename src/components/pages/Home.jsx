@@ -14,7 +14,6 @@ export default function Home() {
               height="315"
               src="https://www.youtube.com/embed/YT7ERC4km5g?si=NKNgHJ7faZDJQtQZ"
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
@@ -26,7 +25,6 @@ export default function Home() {
               height="315"
               src="https://www.youtube.com/embed/D0hhABqMFb8?si=UhQC41V2MO3P4L5j&amp;start=541"
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullscreen

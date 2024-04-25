@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import playerLogo from "../../assets/images/player-logo.jpeg";
 import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Players() {
@@ -161,7 +162,7 @@ export default function Players() {
           players.map((player) => (
             <div key={player.player_id} className="player-item">
               <div>
-                <img src={player.photo} alt="player" />
+                <img src={playerLogo} alt="player" className="player-logo" />
               </div>
               <div className="player-details">
                 <p>First Name: {player.first_name}</p>
@@ -170,7 +171,7 @@ export default function Players() {
                 <p>Date of Birth: {player.date_of_birth}</p>
                 <p>Position: {player.position}</p>
                 <p>Team: {player.team.team_name}</p>
-                <p>Active: {player.active}</p>
+                <p>Active: {player.active ? "True" : "False"}</p>
               </div>
             </div>
           ))

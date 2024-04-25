@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
+import managerLogo from "../../assets/images/football_manager.webp";
 import { useAuthInfo } from "../../context/AuthContext";
 
 export default function Managers() {
@@ -132,7 +133,7 @@ export default function Managers() {
         {filterManagers.map((manager) => (
           <div key={manager.manager_id} className="manager-item">
             <div>
-              <img src={manager.photo} alt="manager" />
+              <img src={managerLogo} alt="manager" />
             </div>
             <div className="manager-details">
               <p>Name: {manager.manager_name}</p>
