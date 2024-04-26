@@ -26,8 +26,16 @@ export default function NavBar() {
           <NavLink to="/home">Home</NavLink>
           <NavLink to="/teams">Teams</NavLink>
           <NavLink to="/managers">Managers</NavLink>
-          <NavLink to="/players">Players</NavLink>
           <NavLink to="/stats">Stats</NavLink>
+          <div className="navbar-dropdown">
+            <NavLink to="/players">
+              Players <FaAngleDown className="dropdown-arrow" />
+            </NavLink>
+            <div className="dropdown-content">
+              <NavLink to="/players">Player Profiles</NavLink>
+              <NavLink to="/transfer">Transfer Portal</NavLink>
+            </div>
+          </div>
           <div className="navbar-dropdown">
             <NavLink to="/profile" className="dropdown-btn">
               Profile <FaAngleDown className="dropdown-arrow" />

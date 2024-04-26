@@ -10,6 +10,7 @@ import PrivateRoute from "./routing/PrivateRoute";
 import ProfilePage from "./pages/auth/Profile";
 import LoginPage from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Transfer from "./pages/Transfers";
 import Managers from "./pages/Managers";
 import Players from "./pages/Players";
 import Footer from "./nav/Footer";
@@ -44,6 +45,7 @@ function App() {
             <PrivateRoute path="/teams" component={Teams} />
             <PrivateRoute path="/managers" component={Managers} />
             <PrivateRoute path="/players" component={Players} />
+            <PrivateRoute path="/transfer" component={Transfer} />
             <PrivateRoute path="/stats" component={Stats} />
             <Redirect to="/login" />
           </Switch>
